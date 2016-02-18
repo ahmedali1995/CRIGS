@@ -1,45 +1,45 @@
 
 public class CRIGRobot extends EuroBotObject {
+	public Mastermind controller;
 	
 	public enum RobotState {
-		Starting, Idle, Running, Finishing, Stopped
+		Idle, Running, Stopped
 	}
 	RobotState state;
 	
-	public enum TeamColour {
-		Red, Blue
-	}
-	TeamColour colour;
+
 	
-	public CRIGRobot(int teamInt)
+	public CRIGRobot()
 	{
+		this.name = "CRIGRobot";
 		this.is_enemy = false;
 		this.is_fixed = false;
-		if(teamInt == 0)
-		{
-			colour = TeamColour.Blue;
-		}
-		else
-		{
-			colour = TeamColour.Red;
-		}
 
-		initialiseRobot(colour);
+		initialiseRobot();
 
 	}
 
-	private void initialiseRobot(TeamColour colour)
+	private void initialiseRobot()
 	{
-		state = RobotState.Starting;
-		
 		state = RobotState.Idle;
 	}
 	
 	public void Go(int xPos, int yPos)
 	{
-		//Insert code for moving towards a position here.
+		//Ignore command if robot is busy... will have to revisit later.
+		if(state == RobotState.Idle)
+		{
+			//Insert code for moving towards a position here.
+		}
 	}
 	
 	
+	//This is for when the start trigger comes from pulling on a string on robot. Unused at the moment.
+	public void StartMatch()
+	{
+		controller.StartMatch();
+	}
+
+
 	
 }

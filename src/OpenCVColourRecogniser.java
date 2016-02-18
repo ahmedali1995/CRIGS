@@ -1,4 +1,4 @@
-
+//OpenCV wrapper.
 public class OpenCVColourRecogniser implements ObjectRecogniser{
 
 	@Override

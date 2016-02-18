@@ -5,6 +5,7 @@ public class EuroBotObject {
 	 x/y is the short/long axis of the table (Euclidian coordinates from the perspective of a robot in the starting position) 
 	 positions are in mm.
 	 */
+	String name;
 	int xPos, yPos;
 	boolean is_fixed, is_enemy;
 	
@@ -14,6 +15,17 @@ public class EuroBotObject {
 		yPos = 0;
 		is_fixed = true;
 		is_enemy = false;
+		name = "dummy";
+	}
+	
+	public boolean IsSameAs(EuroBotObject otherObject)
+	{
+		//For the moment, consider that they are the same if they are in same place.
+		if(this.xPos == otherObject.xPos && this.yPos == otherObject.yPos)
+		{
+			return true;
+		}
+		else {return false;}
 	}
 
 }

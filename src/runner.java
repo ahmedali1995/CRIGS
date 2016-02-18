@@ -1,41 +1,69 @@
-import java.util.*;
 
-public class runner {
-
+public class Runner {
+	
 	
 public static void main(String[] args)
 	{
-		//This is to keep track of things on the table
-		List<EuroBotObject> all_things = new ArrayList<EuroBotObject>();
+		//There will be a bookkeeper. It keeps track of all objects found on the table.
+		Bookkeeper bookkeeper;
+		bookkeeper = new Bookkeeper();
 		
-		//Initialise the Robot
-		CRIGRobot robot = new CRIGRobot(Integer.parseInt(/*args[0]*/ "0"));
-		all_things.add(robot);
 		
-		//Initialise object recognition
-		ObjectRecogniser or = (ObjectRecogniser) new OpenCVColourRecogniser();
+		//This is where OpenCV and all image recognition goes.
+		ObjectRecogniser or;
+		or = (ObjectRecogniser) new OpenCVColourRecogniser();
 		or.Initialise();
 		
-		//Get all images in file
-		EuroBotObject[] foundObjects = or.GetObjects();
 		
-		//Insert them in list of objects. 
-		//LATER: might need to find a way to determine whether an object is already listed.
-		for(int i = 0; i<foundObjects.length; i++)
-		{
-			all_things.add(foundObjects[i]);
+		//An class to represent our robot
+		CRIGRobot robot;
+		robot = new CRIGRobot();
+		bookkeeper.Add(robot);
+		
+		
+		//This is where all the decisions are made.
+		Mastermind controller;
+		controller = new Mastermind(robot, Integer.parseInt("0"));
+
+		//Mainloop. This keep going as long as the game is running.
+		while(controller.IsReady() || controller.IsMatchOngoing())
+		{	
+			if(controller.IsReady())
+			{
+				System.out.println("Ready!");
+				controller.CheckReadyTime(); //a silly autotrigger for the match.
+			}
+			//Get all objects in image.
+			EuroBotObject[] foundObjects = or.GetObjects();
+		
+			//Insert new objects in bookkeeper's list. 			
+			for(int i = 0; i<foundObjects.length; i++)
+			{
+				bookkeeper.AddIfNew(foundObjects[i]);
+			}
+			
+			//Controller needs to decide where to go based on where things are.
+			int[] newXYPos = controller.DecideWhereToGo(bookkeeper.GetAllObjects());
+			
+			//If the match has started, tell robot to move.
+			if(controller.IsMatchOngoing())
+			{
+				System.out.println("Game on!");
+				robot.Go(newXYPos[0], newXYPos[1]);
+				controller.CheckStartTime();
+			}
+
+
+			
 		}
 		
-		int[] newXYPos = DecideWhereToGo(all_things);
 		
-		robot.Go(newXYPos[0], newXYPos[1]);
+		//Disposing of everything after game
+		or.Dispose();
 		
 		System.out.println("Finished!");
 	}
 	
-	static int[] DecideWhereToGo(List<EuroBotObject> all_things)
-	{
-		int[] newXYPos = new int[] {0, 0};
-		return newXYPos;
-	}
+
+
 }
