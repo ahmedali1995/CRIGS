@@ -18,6 +18,15 @@ public class EuroBotObject {
 		name = "dummy";
 	}
 	
+	public EuroBotObject(int xPos, int yPos, boolean is_fixed, boolean is_enemy, String name)
+	{
+		this.xPos = 0;
+		this.yPos = 0;
+		this.is_fixed = true;
+		this.is_enemy = false;
+		this.name = "dummy";
+	}
+	
 	public boolean IsSameAs(EuroBotObject otherObject)
 	{
 		//For the moment, consider that they are the same if they are in same place.

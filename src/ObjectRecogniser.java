@@ -2,5 +2,7 @@
 public interface ObjectRecogniser {
 	void Initialise();
 	EuroBotObject[] GetObjects();
+	int[] GetUpdatedRobotPosition();
+	void DoImageRecognition();
 	void Dispose();
 }

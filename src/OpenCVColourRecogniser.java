@@ -19,4 +19,16 @@ public class OpenCVColourRecogniser implements ObjectRecogniser{
 		
 	}
 
+	@Override
+	public int[] GetUpdatedRobotPosition() {
+		
+		return new int[] {0, 0};
+	}
+
+	@Override
+	public void DoImageRecognition() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

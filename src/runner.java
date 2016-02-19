@@ -33,7 +33,16 @@ public static void main(String[] args)
 				System.out.println("Ready!");
 				controller.CheckReadyTime(); //a silly autotrigger for the match.
 			}
-			//Get all objects in image.
+			
+			//Do image recognition
+			or.DoImageRecognition();
+			
+			//Update robot's position.
+			int[] newRobotPosition = or.GetUpdatedRobotPosition();
+			bookkeeper.GetObjectByName("CRIGRobot").xPos = newRobotPosition[0];
+			bookkeeper.GetObjectByName("CRIGRobot").yPos = newRobotPosition[1];
+			
+			//Get all objects found in image.
 			EuroBotObject[] foundObjects = or.GetObjects();
 		
 			//Insert new objects in bookkeeper's list. 			

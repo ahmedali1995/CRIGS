@@ -15,9 +15,6 @@ public class CRIGRobot extends EuroBotObject {
 		this.is_enemy = false;
 		this.is_fixed = false;
 
-		
-		
-		
 		initialiseRobot();
 
 	}
