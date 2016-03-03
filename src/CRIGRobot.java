@@ -1,4 +1,4 @@
-
+package src;
 public class CRIGRobot extends EuroBotObject {
 	public Mastermind controller;
 	

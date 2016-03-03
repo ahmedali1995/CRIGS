@@ -1,4 +1,4 @@
-
+package src;
 public class EuroBotObject {
 
 	/* A class for objects that are on the table during the game

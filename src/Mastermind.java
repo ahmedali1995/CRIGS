@@ -1,4 +1,4 @@
-
+package src;
 
 public class Mastermind {
 
@@ -74,7 +74,7 @@ public class Mastermind {
 	//This is to check if gametime is up.
 	public void CheckStartTime()
 	{
-		 if((System.currentTimeMillis()-startTime)<1000)
+		 if((System.currentTimeMillis()-startTime)<5000)
 		 {
 			 
 		 } else { status = Match_Status.Finished; }
